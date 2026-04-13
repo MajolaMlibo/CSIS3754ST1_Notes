@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Data Science Notes & Cheat Sheets — tagged and searchable reference for open-book tests." />
+  <title>DS Notes — Data Science Cheat Sheets</title>
+
+  <!-- Google Fonts (loaded async for performance; system fonts used as fallback) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="logo">📚</div>
+      <h1>DS <span>Notes</span></h1>
+    </div>
+
+    <div class="search-wrapper">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Search notes, tags, topics…"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search notes"
+      />
+      <span class="search-shortcut" title="Press / to focus">/</span>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-icon" id="sidebar-toggle" aria-label="Toggle sidebar" title="Toggle sidebar">☰</button>
+    </div>
+  </header>
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="app-sidebar" aria-label="Navigation">
+
+    <!-- Categories -->
+    <div class="sidebar-section">
+      <h3>Categories</h3>
+      <nav class="category-nav" id="category-nav" aria-label="Note categories">
+        <!-- Rendered by JS -->
+      </nav>
+    </div>
+
+    <!-- Tag Cloud -->
+    <div class="sidebar-section" style="flex:1; overflow: hidden; display:flex; flex-direction:column;">
+      <h3>Tags</h3>
+      <div class="tag-cloud" id="tag-cloud" role="list" aria-label="Filter by tag">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sidebar-section">
+      <h3>Stats</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-num" id="stat-notes">0</span>
+          <span class="stat-label">Notes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-tags">0</span>
+          <span class="stat-label">Tags</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-cats">0</span>
+          <span class="stat-label">Topics</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" id="stat-topics">0</span>
+          <span class="stat-label">Advanced</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="app-main" role="main">
+
+    <!-- Toolbar -->
+    <div class="main-toolbar">
+      <span class="results-info" id="results-info" aria-live="polite"></span>
+      <div class="active-filters" id="active-filters" aria-label="Active filters"></div>
+      <select class="sort-select" id="sort-select" aria-label="Sort notes">
+        <option value="default">Default order</option>
+        <option value="az">A → Z</option>
+        <option value="difficulty">By difficulty</option>
+        <option value="category">By category</option>
+      </select>
+    </div>
+
+    <!-- Notes Grid -->
+    <div class="notes-grid" id="notes-grid" role="list" aria-label="Data Science notes">
+      <!-- Rendered by JS -->
+    </div>
+
+  </main>
+
+</div><!-- /.app-layout -->
+
+<!-- ===================== MODAL ===================== -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal" id="modal-content">
+    <div class="modal-header">
+      <span class="modal-icon" id="modal-icon" aria-hidden="true"></span>
+      <div class="modal-title-area">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-category" id="modal-category"></div>
+      </div>
+      <span id="modal-difficulty" class="card-difficulty" style="margin-top:4px;"></span>
+      <button class="modal-close" id="modal-close" aria-label="Close note">✕</button>
+    </div>
+    <div class="modal-body" id="modal-note-body">
+      <!-- Note content rendered by JS -->
+    </div>
+    <div class="modal-footer" id="modal-footer-tags" aria-label="Note tags">
+      <!-- Tags rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" aria-live="polite"></div>
+
+<!-- Scripts -->
+<script src="js/notes-data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
