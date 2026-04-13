@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes4Me</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Notes4Me</h1>
+
+<input type="text" id="search" placeholder="Search topics...">
+
+<!-- Navigation -->
+<div class="nav">
+    <a href="#libraries">Libraries</a>
+    <a href="#preprocessing">Preprocessing</a>
+    <a href="#cleaning">Data Cleaning</a>
+</div>
+
+<div id="content">
+
+<!-- LIBRARIES -->
+<h2 id="libraries">Python Libraries</h2>
+<pre>
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+</pre>
+
+<ul>
+<li><b>Pandas:</b> DataFrames, data manipulation</li>
+<li><b>NumPy:</b> Arrays, math operations</li>
+<li><b>Matplotlib:</b> Basic plotting</li>
+<li><b>Seaborn:</b> Statistical visualization</li>
+</ul>
+
+<hr>
+
+<!-- PREPROCESSING -->
+<h2 id="preprocessing">Preprocessing</h2>
+
+<h3>Load Data</h3>
+<pre>
+df = pd.read_csv("data.csv")
+df.head()
+df.info()
+df.describe()
+</pre>
+
+<h3>Handle Missing Values</h3>
+<pre>
+df.isnull().sum()
+df.dropna()
+df.fillna(0)
+df.fillna(df.mean(numeric_only=True))
+</pre>
+
+<h3>Encoding Categorical Data</h3>
+<pre>
+pd.get_dummies(df, columns=["Category"])
+</pre>
+
+<h3>Feature Scaling</h3>
+<pre>
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+df_scaled = scaler.fit_transform(df)
+</pre>
+
+<hr>
+
+<!-- DATA CLEANING -->
+<h2 id="cleaning">Data Cleaning</h2>
+
+<h3>Rename Columns</h3>
+<pre>
+df.columns = df.columns.str.strip()
+df.columns = df.columns.str.replace(" ", "_")
+</pre>
+
+<h3>Fix Data Types</h3>
+<pre>
+df["Date"] = pd.to_datetime(df["Date"])
+df["Price"] = df["Price"].astype(float)
+</pre>
+
+<h3>Remove Duplicates</h3>
+<pre>
+df.drop_duplicates(inplace=True)
+</pre>
+
+<h3>Filtering</h3>
+<pre>
+df[df["Age"] > 30]
+df[(df["Age"] > 30) & (df["Salary"] > 50000)]
+</pre>
+
+<h3>Outlier Removal</h3>
+<pre>
+Q1 = df.quantile(0.25)
+Q3 = df.quantile(0.75)
+IQR = Q3 - Q1
+df = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)]
+</pre>
+
+<hr>
+
+<!-- QUICK METHODS -->
+<h2>Quick Methods</h2>
+<pre>
+df.head()
+df.tail()
+df.shape
+df.columns
+df.dtypes
+df.sort_values(by="column")
+df.groupby("column").mean()
+</pre>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
