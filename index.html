@@ -1,114 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Notes4Me</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Notes4Me</h1>
 
-<h1>Notes4Me</h1>
+    <input type="text" id="search" placeholder="Search topics..." />
 
-<input type="text" id="search" placeholder="Search topics...">
+    <div class="file-nav">
+      <a href="index.html">Home (Notes)</a>
+      <a href="Assignment2.html">Assignment 2</a>
+      <a href="ST1_2023.html">ST1 2023</a>
+      <a href="ST1_2024.html">ST1 2024</a>
+      <a href="ST1_2025.html">ST1 2025</a>
+    </div>
 
-<!-- Navigation -->
-<div class="nav">
-    <a href="#libraries">Libraries</a>
-    <a href="#preprocessing">Preprocessing</a>
-    <a href="#cleaning">Data Cleaning</a>
-</div>
+    <div class="nav">
+      <a href="#libraries">Libraries</a>
+      <a href="#preprocessing">Preprocessing</a>
+      <a href="#cleaning">Data Cleaning</a>
+    </div>
 
-<div id="content">
-
-<!-- LIBRARIES -->
-<h2 id="libraries">Python Libraries</h2>
-<pre>
+    <div id="content">
+      <h2 id="libraries">Python Libraries</h2>
+      <pre>
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-</pre>
+      </pre>
 
-<ul>
-<li><b>Pandas:</b> DataFrames, data manipulation</li>
-<li><b>NumPy:</b> Arrays, math operations</li>
-<li><b>Matplotlib:</b> Basic plotting</li>
-<li><b>Seaborn:</b> Statistical visualization</li>
-</ul>
+      <ul>
+        <li><b>Pandas:</b> DataFrames, data manipulation</li>
+        <li><b>NumPy:</b> Arrays, math operations</li>
+        <li><b>Matplotlib:</b> Basic plotting</li>
+        <li><b>Seaborn:</b> Statistical visualization</li>
+      </ul>
 
-<hr>
+      <hr />
 
-<!-- PREPROCESSING -->
-<h2 id="preprocessing">Preprocessing</h2>
+      <h2 id="preprocessing">Preprocessing</h2>
 
-<h3>Load Data</h3>
-<pre>
+      <h3>Load Data</h3>
+      <pre>
 df = pd.read_csv("data.csv")
 df.head()
 df.info()
 df.describe()
-</pre>
+      </pre>
 
-<h3>Handle Missing Values</h3>
-<pre>
+      <h3>Handle Missing Values</h3>
+      <pre>
 df.isnull().sum()
 df.dropna()
 df.fillna(0)
 df.fillna(df.mean(numeric_only=True))
-</pre>
+      </pre>
 
-<h3>Encoding Categorical Data</h3>
-<pre>
+      <h3>Encoding Categorical Data</h3>
+      <pre>
 pd.get_dummies(df, columns=["Category"])
-</pre>
+      </pre>
 
-<h3>Feature Scaling</h3>
-<pre>
+      <h3>Feature Scaling</h3>
+      <pre>
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 df_scaled = scaler.fit_transform(df)
-</pre>
+      </pre>
 
-<hr>
+      <hr />
 
-<!-- DATA CLEANING -->
-<h2 id="cleaning">Data Cleaning</h2>
+      <h2 id="cleaning">Data Cleaning</h2>
 
-<h3>Rename Columns</h3>
-<pre>
+      <h3>Rename Columns</h3>
+      <pre>
 df.columns = df.columns.str.strip()
 df.columns = df.columns.str.replace(" ", "_")
-</pre>
+      </pre>
 
-<h3>Fix Data Types</h3>
-<pre>
+      <h3>Fix Data Types</h3>
+      <pre>
 df["Date"] = pd.to_datetime(df["Date"])
 df["Price"] = df["Price"].astype(float)
-</pre>
+      </pre>
 
-<h3>Remove Duplicates</h3>
-<pre>
+      <h3>Remove Duplicates</h3>
+      <pre>
 df.drop_duplicates(inplace=True)
-</pre>
+      </pre>
 
-<h3>Filtering</h3>
-<pre>
+      <h3>Filtering</h3>
+      <pre>
 df[df["Age"] > 30]
 df[(df["Age"] > 30) & (df["Salary"] > 50000)]
-</pre>
+      </pre>
 
-<h3>Outlier Removal</h3>
-<pre>
+      <h3>Outlier Removal</h3>
+      <pre>
 Q1 = df.quantile(0.25)
 Q3 = df.quantile(0.75)
 IQR = Q3 - Q1
 df = df[~((df < (Q1 - 1.5 * IQR)) | (df > (Q3 + 1.5 * IQR))).any(axis=1)]
-</pre>
+      </pre>
 
-<hr>
+      <hr />
 
-<!-- QUICK METHODS -->
-<h2>Quick Methods</h2>
-<pre>
+      <h2>Quick Methods</h2>
+      <pre>
 df.head()
 df.tail()
 df.shape
@@ -116,11 +117,134 @@ df.columns
 df.dtypes
 df.sort_values(by="column")
 df.groupby("column").mean()
-</pre>
+      </pre>
+    </div>
 
-</div>
+    <div class="section">
+      <h2>1. Setting up Python Environment</h2>
+      <h3>How to install Python</h3>
+      <ul>
+        <li>
+          Go to
+          <a href="https://www.python.org/downloads/">python.org/downloads/</a>.
+        </li>
+        <li>Download the Python Install manager.</li>
+        <li>To run IDLE: Applications -> Python 3.4 -> IDLE.</li>
+        <li>
+          To check version in Terminal: <code>python -V</code> or
+          <code>python --version</code>.
+        </li>
+      </ul>
 
-<script src="script.js"></script>
+      <h3>Installing the Jupyter IDE (WIDE)</h3>
+      <ul>
+        <li>Upgrade PIP: <code>python -m pip install --upgrade pip</code>.</li>
+        <li>Install Jupyter: <code>python -m pip install jupyter</code>.</li>
+        <li>Open Jupyter: <code>jupyter notebook</code>.</li>
+      </ul>
 
-</body>
+      <h3>Essential Data Science Packages</h3>
+      <p>Install using: <code>pip install &lt;package_name&gt;</code>.</p>
+      <ul>
+        <li><strong>NumPy</strong></li>
+        <li><strong>SciPy</strong></li>
+        <li><strong>Pandas</strong></li>
+        <li><strong>Scikit-Learn</strong></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>2. Coding in Python - Pandas</h2>
+      <h3>Importing & Exporting Data</h3>
+      <table>
+        <tr>
+          <th>Action</th>
+          <th>Command</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Import</td>
+          <td><code>import pandas as pd</code></td>
+          <td>Standard alias.</td>
+        </tr>
+        <tr>
+          <td>Read CSV</td>
+          <td><code>pd.read_csv(filename)</code></td>
+          <td>Reads from a CSV file.</td>
+        </tr>
+        <tr>
+          <td>To CSV</td>
+          <td><code>df.to_csv(filename)</code></td>
+          <td>Writes to a CSV file.</td>
+        </tr>
+        <tr>
+          <td>To SQL</td>
+          <td><code>df.to_sql(table, connection_object)</code></td>
+          <td>Writes to a SQL table.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>3. Working with DataFrames</h2>
+      <h3>Inspection & Exploration</h3>
+      <ul>
+        <li><code>df.head(n)</code>: View first n rows.</li>
+        <li><code>df.shape</code>: Returns dimensions (rows, columns).</li>
+        <li><code>df.info()</code>: Index, Datatype, and Memory info.</li>
+        <li>
+          <code>df.describe()</code>: Summary statistics for numerical columns.
+        </li>
+        <li><code>df.value_counts()</code>: Count unique occurrences.</li>
+      </ul>
+
+      <h3>Selection & Slicing</h3>
+      <ul>
+        <li>
+          <strong>By Label (.loc):</strong>
+          <code>mydata.loc["RowLabel", "ColLabel"]</code>.
+        </li>
+        <li>
+          <strong>By Position (.iloc):</strong>
+          <code>mydata.iloc[2, 0]</code> (3rd row, 1st col).
+        </li>
+        <li>
+          <strong>Boolean Filter:</strong>
+          <code>(df["rev"] > 100) & (df["prof"] < 0)</code>.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>4. Data Cleaning</h2>
+      <ul>
+        <li><code>df.isnull()</code>: Checks for null values.</li>
+        <li><code>df.dropna()</code>: Drops rows with null values.</li>
+        <li><code>df.fillna(x)</code>: Replaces nulls with x.</li>
+        <li><code>s.astype(float)</code>: Converts Series to float.</li>
+        <li>
+          <code>df.rename(columns={'old':'new'})</code>: Selective renaming.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>5. Statistics & Visualization</h2>
+      <h3>Statistics</h3>
+      <ul>
+        <li><code>df.mean()</code>: Mean of columns.</li>
+        <li><code>df.corr()</code>: Pearson's r correlation matrix.</li>
+        <li><code>df.median()</code>: Median of columns.</li>
+      </ul>
+
+      <h3>Plots</h3>
+      <ul>
+        <li><code>Series.plot.hist()</code>: Histogram.</li>
+        <li><code>Series.plot.bar()</code>: Vertical bar plot.</li>
+        <li><code>df.plot.scatter(x='c1', y='c2')</code>: Scatter plot.</li>
+      </ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

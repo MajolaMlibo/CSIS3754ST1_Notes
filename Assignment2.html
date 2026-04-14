@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 2 Memo - 2026</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px auto;
+        max-width: 900px;
+        padding: 20px;
+        color: #333;
+      }
+      .cell {
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+      .markdown-cell {
+        padding: 10px 0;
+      }
+      .code-cell {
+        background-color: #f4f4f4;
+        padding: 15px;
+        border-left: 4px solid #007bff;
+        font-family: monospace;
+        white-space: pre-wrap;
+        font-size: 14px;
+      }
+      .output-cell {
+        padding: 15px;
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        overflow-x: auto;
+        font-family: monospace;
+      }
+      table.dataframe {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+      }
+      table.dataframe th,
+      table.dataframe td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      table.dataframe th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Assignment 2 Memo - 2026</h1>
+
+    <div class="cell markdown-cell">
+      <h2>Import libraries</h2>
+    </div>
+    <div class="cell code-cell">
+      import pandas as pd import numpy as np import matplotlib.pyplot as plt
+      import seaborn as sns
+    </div>
+
+    <div class="cell markdown-cell">
+      <h2>Import data</h2>
+    </div>
+    <div class="cell code-cell">
+      survivors = pd.read_csv("survivors.csv") survivors.head()
+    </div>
+    <div class="cell output-cell">
+      <em
+        >[Dataframe Output: First 5 rows of survivors dataset displaying columns
+        like PassengerId, Survived, Pclass, Name, etc.]</em
+      >
+    </div>
+
+    <div class="cell markdown-cell">
+      <h2>Descriptive stats</h2>
+    </div>
+    <div class="cell code-cell">survivors.describe()</div>
+    <div class="cell output-cell">
+      <em>[Dataframe Output: Descriptive statistics for numeric columns]</em>
+    </div>
+
+    <div class="cell markdown-cell">
+      <h2>Inspect data</h2>
+    </div>
+    <div class="cell code-cell">survivors.columns</div>
+    <div class="cell output-cell">
+      Index(['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
+      'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'], dtype='object')
+    </div>
+
+    <div class="cell code-cell">survivors.dtypes</div>
+    <div class="cell output-cell">
+      PassengerId int64 Survived int64 Pclass int64 Name object Sex object Age
+      float64 SibSp int64 Parch int64 Ticket object Fare float64 Cabin object
+      Embarked object dtype: object
+    </div>
+
+    <div class="cell code-cell">survivors.info()</div>
+    <div class="cell output-cell">
+      &lt;class 'pandas.core.frame.DataFrame'&gt; RangeIndex: 891 entries, 0 to
+      890 Data columns (total 12 columns): ...
+    </div>
+
+    <div class="cell code-cell">survivors.shape</div>
+    <div class="cell output-cell">(891, 12)</div>
+
+    <div class="cell code-cell">survivors.head(50)</div>
+    <div class="cell output-cell">
+      <em>[Dataframe Output: First 50 rows of survivors dataset]</em>
+    </div>
+
+    <div class="cell markdown-cell">
+      <h2>Preliminary Correlation</h2>
+    </div>
+    <div class="cell code-cell">
+      corr = survivors.corr(numeric_only=True) corr
+    </div>
+    <div class="cell output-cell">
+      <em
+        >[Dataframe Output: Correlation Matrix displaying relationships between
+        numeric fields]</em
+      >
+    </div>
+
+    <div class="cell markdown-cell">
+      <h2>Check if all objects have been converted</h2>
+    </div>
+    <div class="cell code-cell">
+      #checking if there're any column with of type 'object'
+      np.sum(survivors_clean.dtypes == 'object')
+    </div>
+    <div class="cell output-cell">0</div>
+
+    <div class="cell markdown-cell">
+      <h2>Write cleaned and pre-processed data to CSV file</h2>
+    </div>
+    <div class="cell code-cell">
+      survivors_clean.to_csv('clean_survivors.csv', index=False,
+      encoding='utf-8')
+    </div>
+  </body>
+</html>
