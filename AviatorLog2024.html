@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Aviation Log 2024 Analysis</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        border-bottom: 1px solid #eaecef;
+        padding-bottom: 0.3em;
+      }
+      code {
+        background-color: rgba(27, 31, 35, 0.05);
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      }
+      pre {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 16px;
+        overflow: auto;
+        border: 1px solid #ddd;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 10px 0;
+        font-size: 12px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #dfe2e5;
+      }
+      th,
+      td {
+        padding: 6px 13px;
+        text-align: right;
+      }
+      tr:nth-child(even) {
+        background-color: #f8f8f8;
+      }
+      .output_container {
+        margin-bottom: 20px;
+      }
+      .stdout {
+        color: #24292e;
+        background: #ffffff;
+        border-left: 4px solid #0366d6;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Aviation Log 2024</h1>
+
+    <h2>1. Import Libraries and Data</h2>
+    <pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+log = pd.read_csv("C:/Users/Student/Downloads/aviation_log.csv")
+log.head()</code></pre>
+
+    <h2>2. Rename Columns</h2>
+    <pre><code>log = log.rename(columns={"Location": "Incident_Location",
+                         "Operator":"Airline_Operator",
+                         "Type":"Aircraft_Type",
+                         "Registration":"Registration_Number",
+                         "Aboard":"People_Aboard",
+                         "Fatalities":"Fatalities_Aboard",
+                         "Ground":"Ground_Fatalities",
+                         "Summary":"Event_Info"})</code></pre>
+
+    <h2>3. Dimensions</h2>
+    <pre><code>print("Rows: ", log.shape[0])
+print("Columns: ", log.shape[1])
+print("Number of elements: ", log.size)</code></pre>
+    <div class="stdout">
+      <pre>
+Rows:  5268
+Columns:  13
+Number of elements:  68484</pre
+      >
+    </div>
+
+    <h2>4. Worst Crash Analysis</h2>
+    <pre><code>log["Total_Fatalities"] = log["Fatalities_Aboard"] + log["Ground_Fatalities"]
+max_fatalities = log['Total_Fatalities'].max()
+crash_date = log[log['Total_Fatalities'] == max_fatalities]['Date'].iloc[0]
+print(f"Max Total Fatalities: {max_fatalities}")
+print(f"Date of worst crash: {crash_date}")</code></pre>
+    <div class="stdout">
+      <pre>
+Max Total Fatalities: 2842.0
+Date of worst crash: 2001-09-11 00:00:00</pre
+      >
+    </div>
+
+    <h2>5. Operator Rank (Top 5)</h2>
+    <table>
+      <tr>
+        <th>Operator</th>
+        <th>Crashes</th>
+      </tr>
+      <tr>
+        <td>Aeroflot</td>
+        <td>179</td>
+      </tr>
+      <tr>
+        <td>Military - U.S. Air Force</td>
+        <td>176</td>
+      </tr>
+      <tr>
+        <td>Air France</td>
+        <td>70</td>
+      </tr>
+      <tr>
+        <td>Deutsche Lufthansa</td>
+        <td>65</td>
+      </tr>
+      <tr>
+        <td>United Air Lines</td>
+        <td>44</td>
+      </tr>
+    </table>
+
+    <h2>6. Visualizations & Deductions</h2>
+    <h3>Fatalities Comparison</h3>
+    <p>
+      <strong>Deduction:</strong> Most Fatalities occur on board compared to on
+      the ground.
+    </p>
+    <p>
+      <strong>Seaborn Analysis:</strong> The bar chart shows that fatalities
+      aboard contribute more to the total number of fatalities except for the
+      year 2001 (World Trade Center events).
+    </p>
+
+    <h2>7. Data Cleaning and Preparation</h2>
+    <ul>
+      <li>
+        <strong>Missing Values:</strong> Handled by dropping rows with null
+        values using <code>log.dropna()</code>.
+      </li>
+      <li>
+        <strong>Label Encoding:</strong> <code>Airline_Operator</code> and
+        <code>Aircraft_Type</code> converted to numeric values using
+        <code>LabelEncoder</code>.
+      </li>
+      <li>
+        <strong>Scaling:</strong> Numeric columns (excluding date parts) scaled
+        using <code>StandardScaler</code>.
+      </li>
+    </ul>
+
+    <pre><code># Save clean data
+log.to_csv('clean_aviation_log.csv', index=False)</code></pre>
+  </body>
+</html>
